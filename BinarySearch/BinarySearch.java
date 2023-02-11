@@ -16,7 +16,7 @@ public class BinarySearch {
 			else return;
 			
 			List<Integer> numbers = new ArrayList<>();
-			while(listScanner.hasNextInt()) 
+			while(listScanner.hasNextInt())
 				numbers.add(listScanner.nextInt());
 
 			binarySearch(numbers, n);
