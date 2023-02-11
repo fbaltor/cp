@@ -5,21 +5,60 @@ public class BaseChange {
 	public static void main(String[] args) throws IOException {
 		Scanner in = new Scanner(System.in);
 
+		// while (in.hasNextLine()) {
+		// 	int n = in.nextInt();
+		// 	baseChangeToBinary2(n);
+		// }
+
 		while (in.hasNextLine()) {
-			int n = in.nextInt();
-			baseChangeToBinary2(n);
+			int fromBase = in.nextInt();
+			int toBase = in.nextInt();
+			String number = in.next();
+
+			System.out.println(baseChange(fromBase, toBase, number));
 		}
-
-	//	while (in.hasNextLine()) {
-	//		int base1 = in.nextInt();
-	//		String number1 = in.next();
-
-	//		int base2 = in.nextInt();
-	//		String number2 = in.next();
-	//	}
 	}
 
-	private static void baseChange() {}
+	private static String decimalToBase(int decimal) {
+		if (decimal < 10) return Integer.toString(decimal);
+
+		int algorism = ((int) 'A') + (decimal - 10);
+
+		return Character.toString((char) algorism);
+	}
+
+	private static int baseToDecimal(char base) {
+		int ascii = (int) base;
+
+		if (48 <= ascii && ascii <= 57) return ascii - 48;
+
+		return ascii - ((int) 'A') + 10;
+	}
+
+	private static String baseChange(int fromBase, int toBase, String number) {
+		int decimal = 0;
+		for (int i = number.length() - 1; -1 < i; i--) {
+			int baseMultiplier = (int) Math.pow(fromBase, number.length() - i - 1);
+			decimal += baseToDecimal(number.charAt(i)) * baseMultiplier;
+		}
+
+		String base = "";
+
+		int q = decimal;
+		int r;
+
+		do {
+			r = q % toBase;
+			q = q / toBase;
+
+			base = decimalToBase(r) + base;
+
+		} while (q > toBase);
+
+		if (q != 0) base = decimalToBase(q) + base;
+
+		return base;
+	}
 
 	private static void baseChangeToBinary(int baseTen) {
 		String binary = "";
