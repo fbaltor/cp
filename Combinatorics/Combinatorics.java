@@ -5,14 +5,10 @@ public class Combinatorics {
 	public static void main(String[] args) throws IOException {
 		Scanner in = new Scanner(System.in);
 
-		while (in.hasNextLine()) {
-			int k;
-			if (in.hasNextInt()) {
-				k = in.nextInt();
-				String word  = in.next();
+		while (in.hasNext()) {
+			String word  = in.next();
 
-				combinationsK(k, word);
-			}
+			combinations(word);
 		}
 	}
 
